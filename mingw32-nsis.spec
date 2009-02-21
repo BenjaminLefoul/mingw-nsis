@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.43
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -24,13 +24,8 @@ BuildRequires:  python
 BuildRequires:  scons
 
 # since nsis a 32 bit only apps
-#ExclusiveArch:  %{ix86} ppc
-#BuildRequires:  wxGTK-devel
-# The above is only required for Koji.  In mock we _can_ build on
-# x86_64 provided we have the 32 bit libraries required by the next
-# two lines.
-BuildRequires:  /usr/include/gnu/stubs-32.h
-BuildRequires:  /usr/lib/libwx_baseu-2.8.so
+ExclusiveArch:  %{ix86} ppc
+BuildRequires:  wxGTK-devel
 
 
 %description
@@ -77,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Feb 21 2009 Richard W.M. Jones <rjones@redhat.com> - 2.43-3
+- Restore ExclusiveArch line (Levente Farkas).
+
 * Fri Feb 20 2009 Richard W.M. Jones <rjones@redhat.com> - 2.43-2
 - Rebuild for mingw32-gcc 4.4
 
