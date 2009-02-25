@@ -1,9 +1,9 @@
-%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPPLUGINS=System DEBUG_SYMBOLS=1 OPTS=1
+%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPPLUGINS=System SKIPUTILS='NSIS Menu' DEBUG_SYMBOLS=1 OPTS=1
 %define _default_patch_fuzz 2
 
 Name:           mingw32-nsis
 Version:        2.43
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -12,8 +12,10 @@ URL:            http://nsis.sourceforge.net/
 Source0:        http://dl.sourceforge.net/sourceforge/nsis/nsis-%{version}-src.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+# This patch fixes NSIS to actually build 64-bit versions.
+# Originally from Debian, updated by Kevin Kofler.
+Patch0:         nsis-2.43-64bit-fixes.patch
 # Patches from Debian (mainly by Paul Wise).
-Patch0:         nsis-2.42-debian-64bit-fixes.patch
 Patch1:         nsis-2.43-debian-debug-opt.patch
 
 BuildRequires:  mingw32-filesystem >= 40
@@ -23,9 +25,23 @@ BuildRequires:  mingw32-binutils
 BuildRequires:  python
 BuildRequires:  scons
 
-# since nsis a 32 bit only apps
-ExclusiveArch:  %{ix86} ppc
-BuildRequires:  wxGTK-devel
+# Don't build NSIS Menu as it doesn't actually work on POSIX systems: 1. it
+# doesn't find its index.html file without patching, 2. it has various links to
+# .exe files such as the makensisw.exe W32 GUI which are not available in the
+# POSIX version at all and 3. the documentation links have backslashes in the
+# URLs and the relative paths are wrong. Almost none of the links worked when I
+# tested it (after patching problem 1.).
+# Also removes unnecessary wxGTK dependency for this otherwise GUI-less package.
+# (Does it really make sense to drag in wxGTK just to display a HTML file?)
+# If you really want to reenable this, it needs a lot of fixing.
+# -- Kevin Kofler
+# BuildRequires:  wxGTK-devel
+
+# upgrade path for CalcForge users
+Obsoletes:      nsis < %{version}-%{release}
+Provides:       nsis = %{version}-%{release}
+Obsoletes:      nsis-data < %{version}-%{release}
+Provides:       nsis-data = %{version}-%{release}
 
 
 %description
@@ -72,6 +88,13 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-4
+- Updated 64bit-fixes patch (remove some more -m32 use).
+- Drop ExclusiveArch, not needed with the above.
+- Obsoletes/Provides nsis and nsis-data for migration path from CalcForge.
+- Disable NSIS Menu (does not work on *nix, see specfile comment for details).
+- Drop BR wxGTK-devel.
+
 * Sat Feb 21 2009 Richard W.M. Jones <rjones@redhat.com> - 2.43-3
 - Restore ExclusiveArch line (Levente Farkas).
 
