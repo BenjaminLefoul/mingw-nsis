@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.43
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -17,6 +17,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Patch0:         nsis-2.43-64bit-fixes.patch
 # Patches from Debian (mainly by Paul Wise).
 Patch1:         nsis-2.43-debian-debug-opt.patch
+# Use RPM_OPT_FLAGS for the natively-built parts
+Patch2:         nsis-2.43-rpm-opt.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -59,6 +61,7 @@ assembler code.
 
 %patch0 -p1 -b .64bit
 %patch1 -p1 -b .debug
+%patch2 -p1 -b .rpmopt
 
 
 %build
@@ -88,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-5
+- Use RPM_OPT_FLAGS for the natively-built parts
+
 * Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-4
 - Updated 64bit-fixes patch (remove some more -m32 use).
 - Drop ExclusiveArch, not needed with the above.
