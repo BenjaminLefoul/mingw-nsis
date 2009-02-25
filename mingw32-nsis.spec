@@ -35,7 +35,8 @@ BuildRequires:  scons
 # tested it (after patching problem 1.).
 # Also removes unnecessary wxGTK dependency for this otherwise GUI-less package.
 # (Does it really make sense to drag in wxGTK just to display a HTML file?)
-# If you really want to reenable this, it needs a lot of fixing.
+# If you really want to reenable this, it needs a lot of fixing. Oh, and it'd
+# need a .desktop file too.
 # -- Kevin Kofler
 # BuildRequires:  wxGTK-devel
 
