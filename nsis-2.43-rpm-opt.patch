@@ -1,6 +1,6 @@
 diff -ur nsis-2.43-src-debian-debug-opt/SCons/Config/gnu nsis-2.43-src-rpm-opt/SCons/Config/gnu
 --- nsis-2.43-src-debian-debug-opt/SCons/Config/gnu	2009-02-25 08:35:01.000000000 +0100
-+++ nsis-2.43-src-rpm-opt/SCons/Config/gnu	2009-02-25 08:50:15.000000000 +0100
++++ nsis-2.43-src-rpm-opt/SCons/Config/gnu	2009-02-25 13:45:40.000000000 +0100
 @@ -1,5 +1,7 @@
  print "Using GNU tools configuration"
  
@@ -14,7 +14,7 @@ diff -ur nsis-2.43-src-debian-debug-opt/SCons/Config/gnu nsis-2.43-src-rpm-opt/S
  	makensis_env.Append(CCFLAGS = '-g')               # debugging
  if not defenv['DEBUG'] and defenv['OPT']:
 -	makensis_env.Append(CCFLAGS = ['-O2'])            # optimize
-+	makensis_env.Append(CCFLAGS = [os.getenv('RPM_OPT_FLAGS')])            # optimize
++	makensis_env.Append(CCFLAGS = os.getenv('RPM_OPT_FLAGS'))            # optimize
  makensis_env.Append(CFLAGS = ['-Wall'])                   # all warnings
  makensis_env.Append(CXXFLAGS = ['-Wno-non-virtual-dtor']) # ignore virtual dtor warnings
  makensis_env.Append(CXXFLAGS = ['-Wall'])                 # all warnings
@@ -23,7 +23,7 @@ diff -ur nsis-2.43-src-debian-debug-opt/SCons/Config/gnu nsis-2.43-src-rpm-opt/S
  	cp_util_env.Append(CCFLAGS = '-g')          # debugging
  if not defenv['DEBUG'] and defenv['OPT']:
 -	cp_util_env.Append(CCFLAGS = ['-O2'])             # optimize
-+	cp_util_env.Append(CCFLAGS = [os.getenv('RPM_OPT_FLAGS')])             # optimize
++	cp_util_env.Append(CCFLAGS = os.getenv('RPM_OPT_FLAGS'))             # optimize
  cp_util_env.Append(CCFLAGS = ['-Wall'])             # all warnings
  cp_util_env.Append(CCFLAGS = ['-fno-strict-aliasing']) # not safe for strict aliasing
  
