@@ -1,7 +1,7 @@
-diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
---- ./SCons/Config/gnu.debug	2009-02-13 12:41:42.000000000 +0100
-+++ ./SCons/Config/gnu	2009-02-13 12:42:37.000000000 +0100
-@@ -68,13 +68,16 @@ cross_env(stub_env)
+diff -ur nsis-2.43-src-64bit-fixes/SCons/Config/gnu nsis-2.43-src-debian-debug-opt/SCons/Config/gnu
+--- nsis-2.43-src-64bit-fixes/SCons/Config/gnu	2009-02-25 08:33:39.000000000 +0100
++++ nsis-2.43-src-debian-debug-opt/SCons/Config/gnu	2009-02-25 08:35:01.000000000 +0100
+@@ -68,13 +68,16 @@
  
  stub_env.Append(CPPPATH = ['#$BUILD_CONFIG'])
  
@@ -21,7 +21,7 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
  	stub_env.Append(LINKFLAGS = ['-s'])               # strip
  stub_env.Append(LINKFLAGS = ['-mwindows'])          # build windows executables
  stub_env.Append(LINKFLAGS = ['$NODEFLIBS_FLAG'])    # no standard libraries
-@@ -88,15 +91,18 @@ makensis_env = defenv.Clone()
+@@ -88,15 +91,18 @@
  
  makensis_env.Append(CPPPATH = ['#$BUILD_CONFIG'])
  
@@ -43,7 +43,7 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
  	TestStrip(conf)                                 # strip
  conf.Finish()
  
-@@ -105,12 +111,15 @@ conf.Finish()
+@@ -105,12 +111,15 @@
  plugin_env = defenv.Clone()
  cross_env(plugin_env)
  
@@ -62,7 +62,7 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
  	plugin_env.Append(LINKFLAGS = ['-s'])             # strip
  plugin_env.Append(LINKFLAGS = ['-mwindows'])        # build windows executables
  plugin_env.Append(LINKFLAGS = ['$ALIGN_FLAG'])      # 512 bytes align
-@@ -122,7 +131,10 @@ cp_util_env = defenv.Clone()
+@@ -122,7 +131,10 @@
  
  cp_util_env.Append(CPPPATH = ['#$BUILD_CONFIG'])
  
@@ -74,7 +74,7 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
  	cp_util_env.Append(CCFLAGS = ['-O2'])             # optimize
  cp_util_env.Append(CCFLAGS = ['-Wall'])             # all warnings
  cp_util_env.Append(CCFLAGS = ['-fno-strict-aliasing']) # not safe for strict aliasing
-@@ -140,7 +152,7 @@ util_env.Append(LINKFLAGS = ['-mwindows'
+@@ -140,14 +152,14 @@
  util_env.Append(LINKFLAGS = ['$ALIGN_FLAG'])        # 512 bytes align
  
  conf = FlagsConfigure(util_env)
@@ -83,16 +83,15 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
  	util_env.Append(LINKFLAGS = ['-s'])                   # strip
  conf.Finish()
  
-@@ -149,7 +161,7 @@ conf.Finish()
+ ### cross-platform util environment adjustments
+ 
  conf = FlagsConfigure(cp_util_env)
- conf.CheckCompileFlag('-m32')
- conf.CheckLinkFlag('-m32')
 -if not defenv['DEBUG'] and defenv['STRIP'] and defenv['STRIP_CP']:
 +if not defenv['DEBUG'] and not defenv['DEBUG_SYMBOLS'] and defenv['STRIP'] and defenv['STRIP_CP']:
  	TestStrip(conf)                                 # strip
  conf.Finish()
  
-@@ -157,6 +169,9 @@ conf.Finish()
+@@ -155,6 +167,9 @@
  
  test_env = defenv.Clone()
  test_env.Append(CPPPATH = ['#$BUILD_CONFIG'])
@@ -100,12 +99,12 @@ diff -up ./SCons/Config/gnu.debug ./SCons/Config/gnu
 +	test_env.Append(LINKFLAGS = '-g')           # debugging
 +	test_env.Append(CCFLAGS = '-g')             # debugging
  conf = FlagsConfigure(test_env)
- conf.CheckCompileFlag('-m32')
- conf.CheckLinkFlag('-m32')
-diff -up ./SConstruct.debug ./SConstruct
---- ./SConstruct.debug	2009-02-04 15:05:48.000000000 +0100
-+++ ./SConstruct	2009-02-13 12:41:42.000000000 +0100
-@@ -157,6 +157,8 @@ opts.Add(('APPEND_CCFLAGS', 'Additional 
+ conf.Finish()
+ 
+diff -ur nsis-2.43-src-64bit-fixes/SConstruct nsis-2.43-src-debian-debug-opt/SConstruct
+--- nsis-2.43-src-64bit-fixes/SConstruct	2009-02-04 15:05:48.000000000 +0100
++++ nsis-2.43-src-debian-debug-opt/SConstruct	2009-02-25 08:34:11.000000000 +0100
+@@ -157,6 +157,8 @@
  opts.Add(('APPEND_LINKFLAGS', 'Additional linker flags'))
  # build options
  opts.Add(BoolVariable('DEBUG', 'Build executables with debugging information', 'no'))
