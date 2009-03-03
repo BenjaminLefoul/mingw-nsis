@@ -1,9 +1,9 @@
-%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPPLUGINS=System SKIPUTILS='NSIS Menu' DEBUG_SYMBOLS=1 OPTS=1
+%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPPLUGINS=System SKIPUTILS='NSIS Menu' STRIP_CP=false
 %define _default_patch_fuzz 2
 
 Name:           mingw32-nsis
 Version:        2.43
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -15,10 +15,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # This patch fixes NSIS to actually build 64-bit versions.
 # Originally from Debian, updated by Kevin Kofler.
 Patch0:         nsis-2.43-64bit-fixes.patch
-# Patches from Debian (mainly by Paul Wise).
-Patch1:         nsis-2.43-debian-debug-opt.patch
 # Use RPM_OPT_FLAGS for the natively-built parts
-Patch2:         nsis-2.43-rpm-opt.patch
+Patch1:         nsis-2.43-rpm-opt.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -61,8 +59,7 @@ assembler code.
 %setup -q -n nsis-%{version}-src
 
 %patch0 -p1 -b .64bit
-%patch1 -p1 -b .debug
-%patch2 -p1 -b .rpmopt
+%patch1 -p1 -b .rpmopt
 
 
 %build
@@ -92,15 +89,21 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar  3 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-6
+- Don't build the MinGW parts with debugging information, NSIS corrupts the
+  debugging information in the stubs when building installers from them
+- Drop debian-debug-opt patch, all its changes are either taken care of by our
+  rpm-opt patch, unwanted (see above) or unneeded.
+
 * Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-5
 - Use RPM_OPT_FLAGS for the natively-built parts
 
 * Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-4
-- Updated 64bit-fixes patch (remove some more -m32 use).
-- Drop ExclusiveArch, not needed with the above.
-- Obsoletes/Provides nsis and nsis-data for migration path from CalcForge.
-- Disable NSIS Menu (does not work on *nix, see specfile comment for details).
-- Drop BR wxGTK-devel.
+- Updated 64bit-fixes patch (remove some more -m32 use)
+- Drop ExclusiveArch, not needed with the above
+- Obsoletes/Provides nsis and nsis-data for migration path from CalcForge
+- Disable NSIS Menu (does not work on *nix, see specfile comment for details)
+- Drop BR wxGTK-devel
 
 * Sat Feb 21 2009 Richard W.M. Jones <rjones@redhat.com> - 2.43-3
 - Restore ExclusiveArch line (Levente Farkas).
