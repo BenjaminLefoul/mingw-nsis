@@ -93,7 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 - Don't build the MinGW parts with debugging information, NSIS corrupts the
   debugging information in the stubs when building installers from them
 - Drop debian-debug-opt patch, all its changes are either taken care of by our
-  rpm-opt patch, unwanted (see above) or unneeded.
+  rpm-opt patch, unwanted (see above) or unneeded
 
 * Wed Feb 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-5
 - Use RPM_OPT_FLAGS for the natively-built parts
