@@ -2,8 +2,8 @@
 %define _default_patch_fuzz 2
 
 Name:           mingw32-nsis
-Version:        2.43
-Release:        6%{?dist}
+Version:        2.44
+Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -89,6 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* San Mar 14 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.44-1
+- Update to 2.44 (#488522)
+
 * Tue Mar  3 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-6
 - Don't build the MinGW parts with debugging information, NSIS corrupts the
   debugging information in the stubs when building installers from them
