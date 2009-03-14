@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* San Mar 14 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.44-1
+* Sat Mar 14 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.44-1
 - Update to 2.44 (#488522)
 
 * Tue Mar  3 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.43-6
