@@ -1,8 +1,8 @@
-%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPPLUGINS=System SKIPUTILS='NSIS Menu' STRIP_CP=false
+%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false
 %define _default_patch_fuzz 2
 
 Name:           mingw32-nsis
-Version:        2.44
+Version:        2.45
 Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
@@ -50,9 +50,7 @@ NSIS, the Nullsoft Scriptable Install System, is a script-driven
 Windows installation system.
 
 This package includes native Fedora binaries of makensis (etc.) and
-all plugins except for System.dll.  The System.dll plugin cannot be
-built natively at this time since it includes inline Microsoft
-assembler code.
+all plugins.
 
 
 %prep
@@ -89,6 +87,13 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jul 21 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.45-1
+- Update to 2.45 (#512429)
+
+* Tue Jun 30 2009 Stu Tomlinson <stu@nosnilmot.com> - 2.44-2
+- Re-enable System.dll plugin, inline Microsoft assembler code was
+  replaced in 2.42 (#509234)
+
 * Sat Mar 14 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.44-1
 - Update to 2.44 (#488522)
 
