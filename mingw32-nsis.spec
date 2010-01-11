@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.45
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -17,6 +17,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Patch0:         nsis-2.43-64bit-fixes.patch
 # Use RPM_OPT_FLAGS for the natively-built parts
 Patch1:         nsis-2.43-rpm-opt.patch
+# Make plugins not depend on libgcc_s_sjlj-1.dll (#553971)
+Patch2:         nsis-2.45-static-libgcc.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -58,6 +60,7 @@ all plugins.
 
 %patch0 -p1 -b .64bit
 %patch1 -p1 -b .rpmopt
+%patch2 -p1 -b .static-libgcc
 
 
 %build
@@ -87,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jan 11 2010 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.45-3
+- Make plugins not depend on libgcc_s_sjlj-1.dll (#553971)
+
 * Sat Jul 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.45-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
