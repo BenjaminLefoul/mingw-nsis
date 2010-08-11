@@ -2,8 +2,8 @@
 %define _default_patch_fuzz 2
 
 Name:           mingw32-nsis
-Version:        2.45
-Release:        3%{?dist}
+Version:        2.46
+Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Aug 11 2010 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.46-1
+- Update to 2.46 (#544675)
+
 * Mon Jan 11 2010 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.45-3
 - Make plugins not depend on libgcc_s_sjlj-1.dll (#553971)
 
