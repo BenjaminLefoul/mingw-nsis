@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.46
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -19,6 +19,8 @@ Patch0:         nsis-2.43-64bit-fixes.patch
 Patch1:         nsis-2.43-rpm-opt.patch
 # Make plugins not depend on libgcc_s_sjlj-1.dll (#553971)
 Patch2:         nsis-2.45-static-libgcc.patch
+# Make plugins not depend on libstdc++-6.dll (#734905)
+Patch3:         nsis-2.46-static-libstdc++.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -61,6 +63,7 @@ all plugins.
 %patch0 -p1 -b .64bit
 %patch1 -p1 -b .rpmopt
 %patch2 -p1 -b .static-libgcc
+%patch3 -p1 -b .static-libstdc++
 
 
 %build
@@ -90,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Sep 08 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.46-3
+- Make plugins not depend on libstdc++-6.dll (#734905)
+
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
