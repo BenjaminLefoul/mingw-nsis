@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.46
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Thu Sep 08 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> - 2.46-3
 - Make plugins not depend on libstdc++-6.dll (#734905)
 
