@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.46
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -21,6 +21,8 @@ Patch1:         nsis-2.43-rpm-opt.patch
 Patch2:         nsis-2.45-static-libgcc.patch
 # Make plugins not depend on libstdc++-6.dll (#734905)
 Patch3:         nsis-2.46-static-libstdc++.patch
+# Missing #include <unistd.h> to get close(2) function.
+Patch4:         nsis-2.46-missing-unistd-include.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -64,6 +66,7 @@ all plugins.
 %patch1 -p1 -b .rpmopt
 %patch2 -p1 -b .static-libgcc
 %patch3 -p1 -b .static-libstdc++
+%patch4 -p1 -b .missing-unistd-include
 
 
 %build
@@ -93,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jan 16 2012 Richard W.M. Jones <rjones@redhat.com> - 2.46-5
+- Missing #include <unistd.h> to get close(2) function.
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
