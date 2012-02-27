@@ -3,7 +3,7 @@
 
 Name:           mingw32-nsis
 Version:        2.46
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -96,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Feb 27 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.46-6
+- Rebuild against the mingw-w64 toolchain
+
 * Mon Jan 16 2012 Richard W.M. Jones <rjones@redhat.com> - 2.46-5
 - Missing #include <unistd.h> to get close(2) function.
 
