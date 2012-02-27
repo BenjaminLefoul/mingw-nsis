@@ -23,6 +23,8 @@ Patch2:         nsis-2.45-static-libgcc.patch
 Patch3:         nsis-2.46-static-libstdc++.patch
 # Missing #include <unistd.h> to get close(2) function.
 Patch4:         nsis-2.46-missing-unistd-include.patch
+# Add support to build against the mingw-w64 toolchain
+Patch5:         nsis-add-mingw-w64-support.patch
 
 BuildRequires:  mingw32-filesystem >= 40
 BuildRequires:  mingw32-gcc
@@ -67,6 +69,7 @@ all plugins.
 %patch2 -p1 -b .static-libgcc
 %patch3 -p1 -b .static-libstdc++
 %patch4 -p1 -b .missing-unistd-include
+%patch5 -p0 -b .mingw-w64
 
 
 %build
@@ -98,6 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Feb 27 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.46-6
 - Rebuild against the mingw-w64 toolchain
+- Added a patch to fix compatibility with mingw-w64
 
 * Mon Jan 16 2012 Richard W.M. Jones <rjones@redhat.com> - 2.46-5
 - Missing #include <unistd.h> to get close(2) function.
