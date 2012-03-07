@@ -1,9 +1,9 @@
 %define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false
 %define _default_patch_fuzz 2
 
-Name:           mingw32-nsis
+Name:           mingw-nsis
 Version:        2.46
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -46,14 +46,24 @@ BuildRequires:  scons
 # -- Kevin Kofler
 # BuildRequires:  wxGTK-devel
 
+
+%description
+NSIS, the Nullsoft Scriptable Install System, is a script-driven
+Windows installation system.
+
+This package includes native Fedora binaries of makensis (etc.) and
+all plugins.
+
+
+%package -n mingw32-nsis
+Summary:        Nullsoft Scriptable Install System
 # upgrade path for CalcForge users
 Obsoletes:      nsis < %{version}-%{release}
 Provides:       nsis = %{version}-%{release}
 Obsoletes:      nsis-data < %{version}-%{release}
 Provides:       nsis-data = %{version}-%{release}
 
-
-%description
+%description -n mingw32-nsis
 NSIS, the Nullsoft Scriptable Install System, is a script-driven
 Windows installation system.
 
@@ -89,7 +99,7 @@ mv $RPM_BUILD_ROOT%{_docdir}/nsis $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 rm -rf $RPM_BUILD_ROOT
 
 
-%files
+%files -n mingw32-nsis
 %defattr(-,root,root)
 %doc %{_docdir}/%{name}-%{version}
 %config(noreplace) %{_sysconfdir}/nsisconf.nsh
@@ -99,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Mar 07 2012 Kalev Lember <kalevlember@gmail.com> - 2.46-7
+- Renamed the source package to mingw-nsis (#800987)
+
 * Mon Feb 27 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.46-6
 - Rebuild against the mingw-w64 toolchain
 - Added a patch to fix compatibility with mingw-w64
