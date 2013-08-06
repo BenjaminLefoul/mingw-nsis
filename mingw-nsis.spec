@@ -3,7 +3,7 @@
 
 Name:           mingw-nsis
 Version:        2.46
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir $RPM_BUILD_ROOT
 scons %{sconsopts} PREFIX_DEST=$RPM_BUILD_ROOT install
 
-mv $RPM_BUILD_ROOT%{_docdir}/nsis $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+mv $RPM_BUILD_ROOT%{_docdir}/nsis $RPM_BUILD_ROOT%{_docdir}/%{name}
 
 
 %clean
@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n mingw32-nsis
 %defattr(-,root,root)
-%doc %{_docdir}/%{name}-%{version}
+%doc %{_docdir}/%{name}
 %config(noreplace) %{_sysconfdir}/nsisconf.nsh
 %{_bindir}/*
 #{_includedir}/nsis
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug  6 2013 Richard W.M. Jones <rjones@redhat.com> - 2.46-11
+- Unversioned docdir on Fedora 20 (RHBZ#993867).
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
