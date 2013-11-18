@@ -9,7 +9,7 @@ Summary:        Nullsoft Scriptable Install System
 License:        zlib and CPL
 Group:          Development/Libraries
 URL:            http://nsis.sourceforge.net/
-Source0:        http://dl.sourceforge.net/sourceforge/nsis/nsis-%{version}-src.tar.bz2
+Source0:        http://downloads.sourceforge.net/nsis/nsis-%{version}-src.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # This patch fixes NSIS to actually build 64-bit versions.
