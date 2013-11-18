@@ -1,5 +1,5 @@
-%define sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false
-%define _default_patch_fuzz 2
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false
+%global _default_patch_fuzz 2
 
 Name:           mingw-nsis
 Version:        2.46
