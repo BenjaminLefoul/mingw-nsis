@@ -1,9 +1,9 @@
-%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192
 %global _default_patch_fuzz 2
 
 Name:           mingw-nsis
 Version:        2.46
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri May 29 2015 Richard W.M. Jones <rjones@redhat.com> - 2.46-15
+- Add NSIS_MAX_STRLEN=8192 to sconsopts (RHBZ#1090075).
+
 * Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 2.46-14
 - Rebuilt for GCC 5 C++11 ABI change
 
