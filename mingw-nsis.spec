@@ -3,7 +3,7 @@
 
 Name:           mingw-nsis
 Version:        2.46
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-16
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Fri May 29 2015 Richard W.M. Jones <rjones@redhat.com> - 2.46-15
 - Add NSIS_MAX_STRLEN=8192 to sconsopts (RHBZ#1090075).
 
