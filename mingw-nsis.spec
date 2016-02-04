@@ -3,7 +3,7 @@
 
 Name:           mingw-nsis
 Version:        2.46
-Release:        16%{?dist}
+Release:        17%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.46-17
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-16
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
