@@ -2,8 +2,8 @@
 %global _default_patch_fuzz 2
 
 Name:           mingw-nsis
-Version:        2.46
-Release:        17%{?dist}
+Version:        2.50
+Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -109,6 +109,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Feb 18 2016 Richard W.M. Jones <rjones@redhat.com> - 2.50-1
+- New upstream version 2.50.
+- Fixes serious DLL hijacking attack:
+  https://sourceforge.net/p/nsis/bugs/1125/
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.46-17
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
