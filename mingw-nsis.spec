@@ -2,7 +2,7 @@
 %global _default_patch_fuzz 2
 
 Name:           mingw-nsis
-Version:        2.50
+Version:        2.51
 Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
@@ -109,6 +109,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jun 09 2016 Benjamin Lefoul <benjamin.lefoul@nwise.se> - 2.51-1
+- New upstream version 2.51.
+- Fixes serious DLL hijacking attack:
+  https://sourceforge.net/p/nsis/bugs/1125/
+
 * Thu Feb 18 2016 Richard W.M. Jones <rjones@redhat.com> - 2.50-1
 - New upstream version 2.50.
 - Fixes serious DLL hijacking attack:
